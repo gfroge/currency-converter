@@ -2,9 +2,9 @@
   <v-app dark>
     <AppHeader/>
     <v-main>
-      <v-container class="px-4" style="max-width:1400px">
+      
         <Nuxt />
-      </v-container>
+    
     </v-main>
   </v-app>
 </template>

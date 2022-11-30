@@ -1,11 +1,11 @@
 <template>
-    <v-card style="max-width:330px" flat class="flat pa-5 ma-4 d-flex flex-column align-center">
+    <v-card style="max-width:400px; width: 100%;" flat class="flat pa-5 ma-4 d-flex flex-column align-center">
 
         <v-card-title class="title">
             {{currency}}
         </v-card-title>
 
-        <v-text-field style="max-width:250px;" class="px-5 headline primary--text my-input centered-input"
+        <v-text-field style="max-width:300px; width: 100%;" class="px-0 headline primary--text my-input centered-input"
             color="primary" :loading="isLoading" :value="price"></v-text-field>
     </v-card>
 </template>
