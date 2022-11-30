@@ -6,7 +6,7 @@
         </v-card-title>
 
         <v-text-field style="max-width:300px; width: 100%;" class="px-0 headline primary--text my-input centered-input"
-            color="primary" :loading="isLoading" :value="price"></v-text-field>
+            color="primary" :loading="isLoading" :value="num"></v-text-field>
     </v-card>
 </template>
 
@@ -14,7 +14,7 @@
 export default {
     props: {
         currency: { type: String, default: 'USD'},
-        price: {type: Number, default: 0}
+        num: {type: Number, default: 0}
     },
 
     data() {

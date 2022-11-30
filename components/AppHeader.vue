@@ -1,6 +1,6 @@
 <template>
     <v-app-bar fixed app>
-        <v-container class="px-4" style="max-width:1400px">
+        <v-container class="px-4" style="max-width:900px">
             <v-btn class="logo-btn" width="48" height="48" depressed nuxt to="/">
                 <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect x="3.59998" y="25.2" width="4.8" height="18" fill="#31475E" />
