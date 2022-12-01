@@ -11,6 +11,7 @@
         <v-container grid-list-xs class="d-flex px-9 justify-center">
             <v-text-field v-model="num" tabindex="1" style="max-width:235px;"
                 class="px-5 headline primary--text my-input centered-input" color="primary"></v-text-field>
+
             <div style="max-width:214px;" class="d-flex justify-space-between pr-5">
                 <v-text-field v-model="from" tabindex="2" style="max-width:100px;"
                     class="pr-5 headline primary--text my-input centered-input" color="primary"
@@ -19,7 +20,7 @@
                     in
                 </v-card-text>
                 <v-text-field v-model="to" tabindex="3" style="max-width:100px;"
-                    class="pl-5 headline primary--text my-input centered-input" color="primary"
+                    class="text-uppercase pl-5 headline primary--text my-input centered-input" color="primary"
                     ></v-text-field>
             </div>
             <v-btn @click="calc" tabindex="4" class="align-self-center" color="accent">Перевести</v-btn>
@@ -46,3 +47,9 @@ export default {
     },
 }
 </script>
+
+<style>
+.v-text-field__slot input{
+    text-transform: uppercase !important;
+}
+</style>
