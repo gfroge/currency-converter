@@ -1,51 +1,91 @@
 <template>
+  <v-container class="px-4" style="max-width: 900px">
+    <converter-input-title @request="assignValues" @snack="snackbar = true" />
 
-  <v-container class="px-4" style="max-width:900px">
-    <converter-input-title @request="assignValues"/>
+    <ValidationObserver ref="observer">
+      <v-card
+        style="max-width: 900px"
+        class="rounded-xl d-flex justify-space-between align-center"
+      >
+        <ConverterCurrencyCard
+          :currency="currencyFrom"
+          :num="num1"
+          @valueChange="setNewValue($event, 1)"
+        />
+        <div>
+          <v-btn icon class="pa-7" @click="convertManully('right')">
+            <v-icon dark large> mdi-arrow-right </v-icon>
+          </v-btn>
+          <v-btn icon class="pa-7" @click="convertManully('left')">
+            <v-icon dark large> mdi-arrow-left </v-icon>
+          </v-btn>
+        </div>
+        <ConverterCurrencyCard
+          :currency="currencyTo"
+          :num="num2"
+          @valueChange="setNewValue($event, 2)"
+        />
+      </v-card>
+    </ValidationObserver>
 
-    <v-card style="max-width:900px" class="rounded-xl d-flex justify-space-between align-center">
-
-      <ConverterCurrencyCard :currency="currencyFrom" :num="num1"/>
-      <v-btn icon class="pa-7">
-        <v-icon dark large>
-          mdi-arrow-left-right
-        </v-icon>
-      </v-btn>
-      <ConverterCurrencyCard :currency="currencyTo" :num="num2"/>
-
-    </v-card>
-
+    <v-snackbar v-model="snackbar">
+      {{ text }}
+      <template #action="{ attrs }">
+        <v-btn color="error" text v-bind="attrs" @click="snackbar = false">
+          Закрыть
+        </v-btn>
+      </template>
+    </v-snackbar>
   </v-container>
-
-
 </template>
 
 <script>
 export default {
-  name: "IndexPage",
+  name: 'IndexPage',
   data() {
     return {
-      currencyFrom: 'USD',
-      currencyTo: 'RUB',
+      currencyFrom: 'AED',
+      currencyTo: 'ALL',
       num1: '1',
-      num2: '60'
+      num2: '60',
+      snackbar: false,
+      text: `Пожалуйста, проверьте правильность значений`,
     }
   },
   methods: {
     assignValues(obj) {
-      const {from, to, num} = obj
-      this.currencyFrom = from.toUpperCase();
-      this.currencyTo = to.toUpperCase();
-      this.num1 = num;
+      const { from, to, num } = obj
+      this.currencyFrom = from.toUpperCase()
+      this.currencyTo = to.toUpperCase()
+      this.num1 = num
       this.calc(from.toUpperCase(), to.toUpperCase(), num)
     },
-    calc(from, to, num) {
-      const sampleData = require('@@/static/sample.json');
-      const val1 = sampleData.data[from].value;
-      const val2 = sampleData.data[to].value / val1 * num;
-
-      this.num2 = Number(val2).toFixed(2);
-    }
+    calc(from, to, num, side = 'right') {
+      const sampleData = require('@@/static/sample.json')
+      const val1 = sampleData.data[from].value
+      const val2 = (sampleData.data[to].value / val1) * num
+      if (side === 'right') {
+        this.num2 = Number(val2).toFixed(4)
+      } else {
+        this.num1 = Number(val2).toFixed(4)
+      }
+    },
+    convertManully(side) {
+      this.$refs.observer.validate().then((result) => {
+        if (result) {
+          if (side === 'right') {
+            this.calc(this.currencyFrom, this.currencyTo, this.num1, side)
+          } else {
+            this.calc(this.currencyTo, this.currencyFrom, this.num2, side)
+          }
+        } else {
+          this.snackbar = true
+        }
+      })
+    },
+    setNewValue(val, numberOfCard) {
+      numberOfCard === 2 ? (this.num2 = val) : (this.num1 = val)
+    },
   },
 }
 </script>

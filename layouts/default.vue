@@ -1,10 +1,8 @@
 <template>
   <v-app dark>
-    <AppHeader/>
+    <AppHeader />
     <v-main>
-      
-        <Nuxt />
-    
+      <Nuxt />
     </v-main>
   </v-app>
 </template>
