@@ -3,15 +3,8 @@
     <converter-input-title @request="assignValues" @snack="snackbar = true" />
 
     <ValidationObserver ref="observer">
-      <v-card
-        style="max-width: 900px"
-        class="rounded-xl d-flex justify-space-between align-center"
-      >
-        <ConverterCurrencyCard
-          :currency="currencyFrom"
-          :num="num1"
-          @valueChange="setNewValue($event, 1)"
-        />
+      <v-card style="max-width: 900px" class="rounded-xl d-flex justify-space-between align-center">
+        <ConverterCurrencyCard :currency="currencyFrom" :num="num1" @valueChange="setNewValue($event, 1)" />
         <div>
           <v-btn icon class="pa-7" @click="convertManully('right')">
             <v-icon dark large> mdi-arrow-right </v-icon>
@@ -20,11 +13,7 @@
             <v-icon dark large> mdi-arrow-left </v-icon>
           </v-btn>
         </div>
-        <ConverterCurrencyCard
-          :currency="currencyTo"
-          :num="num2"
-          @valueChange="setNewValue($event, 2)"
-        />
+        <ConverterCurrencyCard :currency="currencyTo" :num="num2" @valueChange="setNewValue($event, 2)" />
       </v-card>
     </ValidationObserver>
 
@@ -55,13 +44,19 @@ export default {
   methods: {
     assignValues(obj) {
       const { from, to, num } = obj
-      this.currencyFrom = from.toUpperCase()
-      this.currencyTo = to.toUpperCase()
-      this.num1 = num
-      this.calc(from.toUpperCase(), to.toUpperCase(), num)
+      const sampleData = require('@@/static/sample.json');
+      if (sampleData.data[from] && sampleData.data[to]) {
+        this.currencyFrom = from.toUpperCase()
+        this.currencyTo = to.toUpperCase()
+        this.num1 = num
+        this.calc(from.toUpperCase(), to.toUpperCase(), num, 'right',sampleData)
+      }
+      else {
+        this.snackbar = true;
+      }
+
     },
-    calc(from, to, num, side = 'right') {
-      const sampleData = require('@@/static/sample.json')
+    calc(from, to, num, side = 'right', sampleData) {
       const val1 = sampleData.data[from].value
       const val2 = (sampleData.data[to].value / val1) * num
       if (side === 'right') {
@@ -69,6 +64,9 @@ export default {
       } else {
         this.num1 = Number(val2).toFixed(4)
       }
+
+      this.snackbar = true;
+
     },
     convertManully(side) {
       this.$refs.observer.validate().then((result) => {
