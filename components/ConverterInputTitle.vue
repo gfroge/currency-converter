@@ -41,7 +41,7 @@
               :error="Boolean(v.errors[0])"
               tabindex="2"
               style="max-width: 100px"
-              class="pr-5 headline primary--text centered-input my-input"
+              class="first-currency pr-5 headline primary--text centered-input my-input"
               color="primary"
             ></v-text-field>
 
@@ -64,7 +64,7 @@
               :error="Boolean(v.errors[0])"
               tabindex="3"
               style="max-width: 100px"
-              class="text-uppercase pl-5 headline primary--text centered-input my-input"
+              class="second-currency text-uppercase pl-5 headline primary--text centered-input my-input"
               color="primary"
             ></v-text-field>
 
@@ -87,6 +87,7 @@
 
 <script>
 export default {
+  name: 'ConverterInputTitle',
   data() {
     return {
       from: '',
