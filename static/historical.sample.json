@@ -27,7 +27,7 @@
       "currencies": {
         "AED": {
           "code": "AED",
-          "value": 3.67306
+          "value": 3.8306
         },
         "AFN": {
           "code": "AFN",
@@ -49,7 +49,205 @@
       "currencies": {
         "AED": {
           "code": "AED",
-          "value": 3.67306
+          "value": 3.2
+        },
+        "AFN": {
+          "code": "AFN",
+          "value": 91.80254
+        },
+        "ALL": {
+          "code": "ALL",
+          "value": 108.22904
+        },
+        "AMD": {
+          "code": "AMD",
+          "value": 480.41659
+        },
+        "...": "150+ more currencies"
+      }
+    },
+    {
+      "datetime": "2022-01-03T23:59:59Z",
+      "currencies": {
+        "AED": {
+          "code": "AED",
+          "value": 4.6
+        },
+        "AFN": {
+          "code": "AFN",
+          "value": 91.80254
+        },
+        "ALL": {
+          "code": "ALL",
+          "value": 108.22904
+        },
+        "AMD": {
+          "code": "AMD",
+          "value": 480.41659
+        },
+        "...": "150+ more currencies"
+      }
+    },
+    {
+      "datetime": "2022-01-03T23:59:59Z",
+      "currencies": {
+        "AED": {
+          "code": "AED",
+          "value": 2
+        },
+        "AFN": {
+          "code": "AFN",
+          "value": 91.80254
+        },
+        "ALL": {
+          "code": "ALL",
+          "value": 108.22904
+        },
+        "AMD": {
+          "code": "AMD",
+          "value": 480.41659
+        },
+        "...": "150+ more currencies"
+      }
+    },
+    {
+      "datetime": "2022-01-03T23:59:59Z",
+      "currencies": {
+        "AED": {
+          "code": "AED",
+          "value": 2.7
+        },
+        "AFN": {
+          "code": "AFN",
+          "value": 91.80254
+        },
+        "ALL": {
+          "code": "ALL",
+          "value": 108.22904
+        },
+        "AMD": {
+          "code": "AMD",
+          "value": 480.41659
+        },
+        "...": "150+ more currencies"
+      }
+    },
+    {
+      "datetime": "2022-01-03T23:59:59Z",
+      "currencies": {
+        "AED": {
+          "code": "AED",
+          "value": 2.6
+        },
+        "AFN": {
+          "code": "AFN",
+          "value": 91.80254
+        },
+        "ALL": {
+          "code": "ALL",
+          "value": 108.22904
+        },
+        "AMD": {
+          "code": "AMD",
+          "value": 480.41659
+        },
+        "...": "150+ more currencies"
+      }
+    },
+    {
+      "datetime": "2022-01-03T23:59:59Z",
+      "currencies": {
+        "AED": {
+          "code": "AED",
+          "value": 5.4
+        },
+        "AFN": {
+          "code": "AFN",
+          "value": 91.80254
+        },
+        "ALL": {
+          "code": "ALL",
+          "value": 108.22904
+        },
+        "AMD": {
+          "code": "AMD",
+          "value": 480.41659
+        },
+        "...": "150+ more currencies"
+      }
+    },
+    {
+      "datetime": "2022-01-03T23:59:59Z",
+      "currencies": {
+        "AED": {
+          "code": "AED",
+          "value": 3.9
+        },
+        "AFN": {
+          "code": "AFN",
+          "value": 91.80254
+        },
+        "ALL": {
+          "code": "ALL",
+          "value": 108.22904
+        },
+        "AMD": {
+          "code": "AMD",
+          "value": 480.41659
+        },
+        "...": "150+ more currencies"
+      }
+    },
+    {
+      "datetime": "2022-01-03T23:59:59Z",
+      "currencies": {
+        "AED": {
+          "code": "AED",
+          "value": 1.8
+        },
+        "AFN": {
+          "code": "AFN",
+          "value": 91.80254
+        },
+        "ALL": {
+          "code": "ALL",
+          "value": 108.22904
+        },
+        "AMD": {
+          "code": "AMD",
+          "value": 480.41659
+        },
+        "...": "150+ more currencies"
+      }
+    },
+    {
+      "datetime": "2022-01-03T23:59:59Z",
+      "currencies": {
+        "AED": {
+          "code": "AED",
+          "value": 1.2
+        },
+        "AFN": {
+          "code": "AFN",
+          "value": 91.80254
+        },
+        "ALL": {
+          "code": "ALL",
+          "value": 108.22904
+        },
+        "AMD": {
+          "code": "AMD",
+          "value": 480.41659
+        },
+        "...": "150+ more currencies"
+      }
+    },
+    {
+      "datetime": "2022-01-03T23:59:59Z",
+      "currencies": {
+        "AED": {
+          "code": "AED",
+          "value": 2.2
         },
         "AFN": {
           "code": "AFN",
