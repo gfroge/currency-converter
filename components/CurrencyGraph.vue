@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="graph-wrap">
         <Bar :chart-data="chartData" />
     </div>
 </template>
@@ -51,5 +51,7 @@ export default {
 </script>
 
 <style scoped>
-
+.graph-wrap {
+    min-height: 250px;
+}
 </style>
