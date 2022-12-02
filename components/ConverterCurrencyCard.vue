@@ -33,6 +33,7 @@ export default {
       val: null,
     }
   },
+  
   watch: {
     num: {
       immediate: true,

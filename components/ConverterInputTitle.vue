@@ -23,7 +23,7 @@
             :error="Boolean(v.errors[0])"
             tabindex="1"
             style="max-width: 235px"
-            class="px-5 headline primary--text centered-input"
+            class="px-5 headline primary--text centered-input my-input"
             color="primary"
           ></v-text-field>
 
@@ -41,7 +41,7 @@
               :error="Boolean(v.errors[0])"
               tabindex="2"
               style="max-width: 100px"
-              class="pr-5 headline primary--text centered-input"
+              class="pr-5 headline primary--text centered-input my-input"
               color="primary"
             ></v-text-field>
 
@@ -64,7 +64,7 @@
               :error="Boolean(v.errors[0])"
               tabindex="3"
               style="max-width: 100px"
-              class="text-uppercase pl-5 headline primary--text centered-input"
+              class="text-uppercase pl-5 headline primary--text centered-input my-input"
               color="primary"
             ></v-text-field>
 

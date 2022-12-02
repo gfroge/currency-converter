@@ -3,13 +3,14 @@
     <converter-input-title @request="assignValues" @snack="snackbar = true" />
 
     <ValidationObserver ref="observer">
-      <v-card style="max-width: 900px" class="rounded-xl d-flex justify-space-between align-center">
+      <v-card
+        class="convert-card rounded-xl d-flex justify-space-between align-center flex-column flex-md-row">
         <ConverterCurrencyCard :currency="currencyFrom" :num="num1" @valueChange="setNewValue($event, 1)" />
-        <div>
-          <v-btn icon class="pa-7" @click="convertManully('right')">
+        <div class="">
+          <v-btn icon class="pa-7 button-to" @click="convertManully('right')">
             <v-icon dark large> mdi-arrow-right </v-icon>
           </v-btn>
-          <v-btn icon class="pa-7" @click="convertManully('left')">
+          <v-btn icon class="pa-7 button-to" @click="convertManully('left')">
             <v-icon dark large> mdi-arrow-left </v-icon>
           </v-btn>
         </div>
@@ -45,11 +46,11 @@ export default {
     assignValues(obj) {
       const { from, to, num } = obj
       const sampleData = require('@@/static/sample.json');
-      if (sampleData.data[from] && sampleData.data[to]) {
+      if (sampleData.data[from.toUpperCase()] && sampleData.data[to.toUpperCase()]) {
         this.currencyFrom = from.toUpperCase()
         this.currencyTo = to.toUpperCase()
         this.num1 = num
-        this.calc(from.toUpperCase(), to.toUpperCase(), num, 'right',sampleData)
+        this.calc(from.toUpperCase(), to.toUpperCase(), num, 'right', sampleData)
       }
       else {
         this.snackbar = true;
@@ -57,6 +58,9 @@ export default {
 
     },
     calc(from, to, num, side = 'right', sampleData) {
+      if (!sampleData) {
+        sampleData = require('@@/static/sample.json');
+      }
       const val1 = sampleData.data[from].value
       const val2 = (sampleData.data[to].value / val1) * num
       if (side === 'right') {
@@ -64,9 +68,6 @@ export default {
       } else {
         this.num1 = Number(val2).toFixed(4)
       }
-
-      this.snackbar = true;
-
     },
     convertManully(side) {
       this.$refs.observer.validate().then((result) => {
@@ -87,3 +88,18 @@ export default {
   },
 }
 </script>
+<style scoped>
+.convert-card{
+  max-width: 900px;
+}
+@media(max-width:960px) {
+  .button-to {
+    transform: rotate(90deg);
+  }
+  .convert-card{
+    max-width: 500px;
+    margin: 0 auto;
+  }
+}
+
+</style>
