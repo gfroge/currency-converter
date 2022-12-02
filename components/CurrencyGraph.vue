@@ -1,6 +1,9 @@
 <template>
     <div class="graph-wrap">
         <Bar :chart-data="chartData" />
+        <v-chip v-if="(chip && w==599)" class="ma-2" close @click:close="chip = false">
+            Переверните экран, чтобы отобразить график
+        </v-chip>
     </div>
 </template>
 
@@ -31,7 +34,20 @@ export default {
                     }
                 ]
             },
+            chip: true
         }
+    },
+    computed: {
+        w() {
+            switch (this.$vuetify.breakpoint.name) {
+                case 'xs': return 599
+                case 'sm': return 600
+                case 'md': return 960
+                case 'lg': return 1264
+                case 'xl': return 1904
+                default: return 1980
+            }
+        },
     },
     watch: {
         currencyData: {

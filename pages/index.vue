@@ -28,7 +28,7 @@
 
     <CurrencyGraph v-if="chartData" :currencyData="chartData" />
     <v-skeleton-loader v-if="!chartData" class="mx-auto rounded-xl" type="image"></v-skeleton-loader>
-
+    
 
   </v-container>
 </template>
