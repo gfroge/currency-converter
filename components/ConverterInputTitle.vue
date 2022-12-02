@@ -110,7 +110,7 @@ export default {
   methods: {
     calc() {
       this.$refs.observer.validate().then((result) => {
-        if (result) {
+        if (result && (this.from !== this.to)) {
           this.$emit('request', {
             from: this.from,
             to: this.to,
