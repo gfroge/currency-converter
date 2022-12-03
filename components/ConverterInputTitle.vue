@@ -90,9 +90,9 @@ export default {
   name: 'ConverterInputTitle',
   data() {
     return {
-      from: '',
-      to: '',
-      num: null,
+      from: this.$store.state.converterInput.from,
+      to: this.$store.state.converterInput.to,
+      num: this.$store.state.converterInput.num,
     }
   },
   computed: {
@@ -114,6 +114,11 @@ export default {
           this.$emit('request', {
             from: this.from,
             to: this.to,
+            num: this.num,
+          });
+          this.$store.commit('setConverterInput',{
+            from: this.from.toUpperCase(),
+            to: this.to.toUpperCase(),
             num: this.num,
           })
         } else {

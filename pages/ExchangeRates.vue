@@ -50,7 +50,7 @@
 export default {
     data() {
         return {
-            baseCurrency: 'USD',
+            baseCurrency: this.$store.state.ratesBase,
             snackbar: false,
         }
     },
@@ -72,6 +72,7 @@ export default {
                 if (result) {
                     // request list with base currency of this.baseCurrency
                     console.log(this.baseCurrency);
+                    this.$store.commit('setRatesBase', this.baseCurrency.toUpperCase())
                 } else {
                     this.snackbar = true
                 }

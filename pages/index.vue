@@ -28,7 +28,7 @@
 
     <CurrencyGraph v-if="chartData" :currencyData="chartData" />
     <v-skeleton-loader v-if="!chartData" class="mx-auto rounded-xl" type="image"></v-skeleton-loader>
-    
+
 
   </v-container>
 </template>
@@ -44,10 +44,10 @@ export default {
   },
   data() {
     return {
-      currencyFrom: 'AED',
-      currencyTo: 'ALL',
-      num1: '1',
-      num2: '60',
+      currencyFrom: this.$store.state.converterConvert.from,
+      currencyTo: this.$store.state.converterConvert.to,
+      num1: this.$store.state.converterConvert.fromSum,
+      num2: this.$store.state.converterConvert.toSum,
       snackbar: false,
       text: `Пожалуйста, проверьте правильность значений`,
       chartData: null
@@ -63,6 +63,7 @@ export default {
         this.num1 = num
         this.calc(from.toUpperCase(), to.toUpperCase(), num, 'right', sampleData)
         this.printBar()
+        this.setStoreValues()
       }
       else {
         this.snackbar = true;
@@ -88,6 +89,7 @@ export default {
           } else {
             this.calc(this.currencyTo, this.currencyFrom, this.num2, side)
           }
+          this.setStoreValues();
         } else {
           this.snackbar = true
         }
@@ -104,8 +106,11 @@ export default {
       sampleData.data.forEach(month => {
         this.chartData.push(month.currencies[this.currencyFrom].value);
       });
-
-
+    },
+    setStoreValues() {
+      this.$store.commit('setConverterConvert', {
+        from: this.currencyFrom, fromSum: this.num1, to: this.currencyTo, toSum: this.num2
+      })
     }
   },
 }
