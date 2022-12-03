@@ -64,9 +64,12 @@ export default {
         this.convertManully('right');
       }
     },
-    '$store.state.historicalRates.jsonData'(newValue) {
-      if (newValue) {
-        this.printBar();
+    '$store.state.historicalRates.jsonData': {
+      deep: true,
+      handler(newValue) {
+        if (newValue.data.length === 12) {
+          this.printBar();
+        }
       }
     },
   },
@@ -74,9 +77,6 @@ export default {
     assignValues(obj) {
       const { from, to, num } = obj
       const sampleData = this.$store.state.latestRatesConverter.jsonData
-      // if to changes
-      // fetch historical data with new base
-      // this.$store.commit('setlatestRatesConverter', response json, to)
       if (
         sampleData.data[from.toUpperCase()] &&
         sampleData.data[to.toUpperCase()]
@@ -129,13 +129,21 @@ export default {
       numberOfCard === 2 ? (this.num2 = val) : (this.num1 = val)
     },
     printBar() {
-      // fetch historical data with base currency of currency2
       this.chartData = []
-      const sampleData = this.$store.state.historicalRates.jsonData
-
-      sampleData.data.forEach((month) => {
-        this.chartData.push(month.currencies[this.currencyFrom].value)
-      })
+      if (this.$store.state.historicalRates.base === this.currencyFrom) {
+        const historicalData = this.$store.state.historicalRates.jsonData
+        historicalData.data.forEach((month) => {
+          this.chartData.push(month.rates[this.currencyTo])
+        })
+      }
+      else{
+        this.$store.commit('setHistoricalBase',this.currencyFrom.trim())
+        this.$store.dispatch('getHistoricalData',this.currencyFrom)
+        const historicalData = this.$store.state.historicalRates.jsonData
+        historicalData.data.forEach((month) => {
+          this.chartData.push(month.rates[this.currencyTo])
+        })
+      }
     },
     setStoreValues() {
       this.$store.commit('setConverterConvert', {
@@ -145,6 +153,7 @@ export default {
         toSum: this.num2,
       })
     },
+
   },
 }
 </script>

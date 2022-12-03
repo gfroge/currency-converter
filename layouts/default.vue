@@ -13,7 +13,7 @@ export default {
   name: 'DefaultLayout',
   mounted() {
     this.$store.dispatch('getInitialData')
-
+    this.$store.dispatch('getInitialHistorical')
   },
 }
 </script>

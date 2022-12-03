@@ -52,23 +52,15 @@ export const mutations = {
     sethistoricalRates(state, json) {
         state.historicalRates.jsonData = json
     },
+    pushhistoricalRates(state, obj) {
+        state.historicalRates.jsonData.data.push(obj)
+    },
+    setHistoricalBase(state, newBase){
+        state.historicalRates.base = newBase
+    }
 }
 
 export const actions = {
-    // async fetchCounter({ state }) {
-    //   // make request
-    //   const res = { data: 10 };
-    //   state.counter = res.data;
-    //   return res.data;
-    // }
-    // ! remove before prod
-    //   getSampleData({ commit }) {
-    //     const sampleData = require('@@/static/sample.json')
-    //     const sampleHistoricalData = require('@@/static/historical.sample.json')
-    //     commit('setlatestRates', sampleData)
-    //     commit('setlatestRatesConverter', sampleData)
-    //     commit('sethistoricalRates', sampleHistoricalData)
-    //   },
     async getInitialData({commit}) {
         const url = 'https://api.currencyapi.com/v3/latest?apikey=mECXec0IwIt52Ik75EuwAHKMDCfMQNEB9oHEgi23'
         const options = {
@@ -83,6 +75,41 @@ export const actions = {
         } else {
             alert("Ошибка API latestRates: " + latestRatesResponse.status);
         }
+
     },
 
+    async getInitialHistorical({commit}){
+        commit('sethistoricalRates', {"data":[]});
+        const options = {
+            method: 'GET',
+        };
+        for(let i=1; i<=12; i++){
+            const url = `https://api.currencybeacon.com/v1/historical?base=USD&date=2022-${i>=10?i:`0${i}`}-01&api_key=a54189304372aeabe2941ffaecf3ea97`
+            const ratesResponse = await fetch(url, options);
+            if (ratesResponse.ok) {
+                const json = await ratesResponse.json();
+                commit('pushhistoricalRates', json.response);
+            } else {
+                console.log("Ошибка API latestRates: " + ratesResponse.status);
+            }
+        }
+
+    },
+
+    async getHistoricalData({commit},newBase){
+        commit('sethistoricalRates', {"data":[]});
+        const options = {
+            method: 'GET',
+        };
+        for(let i=1; i<=12; i++){
+            const url = `https://api.currencybeacon.com/v1/historical?base=${newBase.trim()}&date=2022-${i>=10?i:`0${i}`}-01&api_key=a54189304372aeabe2941ffaecf3ea97`
+            const ratesResponse = await fetch(url, options);
+            if (ratesResponse.ok) {
+                const json = await ratesResponse.json();
+                commit('pushhistoricalRates', json.response);
+            } else {
+                console.log("Ошибка API latestRates: " + ratesResponse.status);
+            }
+        }
+    }
 }
