@@ -28,10 +28,13 @@
                 </v-container>
             </ValidationObserver>
         </v-card>
-
-        <RatesList />
-
-
+        <v-card class="px-4 rounded-xl mb-4 py-4" style="max-width: 300px">
+            <RatesList v-if="null" />
+            <div v-else class="skeleton-list" style="overflow-y:auto;overflow-x:hidden;max-height: 60vh;">
+                <v-skeleton-loader v-for="n in 10" :key="n" class="rounded-xl px-0" type="list-item"
+                    style="width:270px"></v-skeleton-loader>
+            </div>
+        </v-card>
         <v-snackbar v-model="snackbar">
             Пожалуйста, проверьте правильность значений
             <template #action="{ attrs }">
@@ -87,15 +90,18 @@ export default {
         margin-right: 5px;
     }
 }
+
 @media(max-width:600px) {
     .first-card {
         margin-right: 0px;
     }
-    .container{
+
+    .container {
         flex-direction: column;
         align-items: center;
     }
-    .first-currency{
+
+    .first-currency {
         padding-right: 0 !important;
     }
 }
