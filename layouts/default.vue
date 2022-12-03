@@ -2,7 +2,7 @@
   <v-app dark>
     <AppHeader />
     <v-main>
-      <Nuxt/>
+      <Nuxt />
     </v-main>
     <AppFooter />
   </v-app>
@@ -11,6 +11,8 @@
 <script>
 export default {
   name: 'DefaultLayout',
+  mounted() {
+    this.$store.dispatch('getSampleData')
+  },
 }
 </script>
-

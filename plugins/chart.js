@@ -1,5 +1,5 @@
-import Vue from "vue";
-import { Line } from "vue-chartjs/legacy";
+import Vue from 'vue'
+import { Line } from 'vue-chartjs/legacy'
 import {
   Chart as ChartJS,
   Title,
@@ -10,7 +10,7 @@ import {
   LinearScale,
   LineElement,
   PointElement,
-} from "chart.js";
+} from 'chart.js'
 
 ChartJS.register(
   Title,
@@ -20,9 +20,9 @@ ChartJS.register(
   BarElement,
   CategoryScale,
   LinearScale,
-  LineElement,
-);
+  LineElement
+)
 
-Vue.component("line-chart", {
+Vue.component('LineChart', {
   extends: Line,
-});
+})

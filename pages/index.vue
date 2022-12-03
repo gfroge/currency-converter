@@ -26,15 +26,12 @@
       </template>
     </v-snackbar>
 
-    <CurrencyGraph v-if="chartData" :currencyData="chartData" />
+    <CurrencyGraph v-if="chartData" :currency-data="chartData" />
     <v-skeleton-loader v-if="!chartData" class="mx-auto rounded-xl" type="image"></v-skeleton-loader>
-
-
   </v-container>
 </template>
 
 <script>
-
 export default {
   name: 'IndexPage',
   props: {
@@ -50,35 +47,64 @@ export default {
       num2: this.$store.state.converterConvert.toSum,
       snackbar: false,
       text: `Пожалуйста, проверьте правильность значений`,
-      chartData: null
+      chartData: null,
     }
+  },
+  mounted() {
+    if (this.$store.state.latestRatesConverter.jsonData) {
+      this.convertManully('right');
+    };
+    if (this.$store.state.historicalRates.jsonData) {
+      this.printBar();
+    };
+  },
+  watch: {
+    '$store.state.latestRatesConverter.jsonData'(newValue) {
+      if (newValue) {
+        this.convertManully('right');
+      }
+    },
+    '$store.state.historicalRates.jsonData'(newValue) {
+      if (newValue) {
+        this.printBar();
+      }
+    },
   },
   methods: {
     assignValues(obj) {
       const { from, to, num } = obj
-      const sampleData = require('@@/static/sample.json');
-      if (sampleData.data[from.toUpperCase()] && sampleData.data[to.toUpperCase()]) {
+      const sampleData = this.$store.state.latestRatesConverter.jsonData
+      if (
+        sampleData.data[from.toUpperCase()] &&
+        sampleData.data[to.toUpperCase()]
+      ) {
         this.currencyFrom = from.toUpperCase()
         this.currencyTo = to.toUpperCase()
         this.num1 = num
-        this.calc(from.toUpperCase(), to.toUpperCase(), num, 'right', sampleData)
+        this.calc(
+          from.toUpperCase(),
+          to.toUpperCase(),
+          num,
+          'right',
+          sampleData
+        )
         this.printBar()
         this.setStoreValues()
-      }
-      else {
-        this.snackbar = true;
+      } else {
+        this.snackbar = true
       }
     },
     calc(from, to, num, side = 'right', sampleData) {
       if (!sampleData) {
-        sampleData = require('@@/static/sample.json');
-      }
-      const val1 = sampleData.data[from].value
-      const val2 = (sampleData.data[to].value / val1) * num
-      if (side === 'right') {
-        this.num2 = Number(val2).toFixed(4)
-      } else {
-        this.num1 = Number(val2).toFixed(4)
+        sampleData = this.$store.state.latestRatesConverter.jsonData
+
+        const val1 = sampleData.data[from].value
+        const val2 = (sampleData.data[to].value / val1) * num
+        if (side === 'right') {
+          this.num2 = Number(val2).toFixed(4)
+        } else {
+          this.num1 = Number(val2).toFixed(4)
+        }
       }
     },
     convertManully(side) {
@@ -89,7 +115,7 @@ export default {
           } else {
             this.calc(this.currencyTo, this.currencyFrom, this.num2, side)
           }
-          this.setStoreValues();
+          this.setStoreValues()
         } else {
           this.snackbar = true
         }
@@ -100,27 +126,31 @@ export default {
     },
     printBar() {
       // fetch historical data with base currency of currency2
-      this.chartData = [];
-      const sampleData = require('@@/static/historical.sample.json');
+      this.chartData = []
+      const sampleData = this.$store.state.historicalRates.jsonData
 
-      sampleData.data.forEach(month => {
-        this.chartData.push(month.currencies[this.currencyFrom].value);
-      });
+      sampleData.data.forEach((month) => {
+        this.chartData.push(month.currencies[this.currencyFrom].value)
+      })
     },
     setStoreValues() {
       this.$store.commit('setConverterConvert', {
-        from: this.currencyFrom, fromSum: this.num1, to: this.currencyTo, toSum: this.num2
+        from: this.currencyFrom,
+        fromSum: this.num1,
+        to: this.currencyTo,
+        toSum: this.num2,
       })
-    }
+    },
   },
 }
 </script>
+
 <style scoped>
 .convert-card {
   max-width: 900px;
 }
 
-@media(max-width:960px) {
+@media (max-width: 960px) {
   .button-to {
     transform: rotate(90deg);
   }
