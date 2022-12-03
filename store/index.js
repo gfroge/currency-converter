@@ -41,8 +41,9 @@ export const mutations = {
     state.converterConvert.to = to
     state.converterConvert.toSum = toSum
   },
-  setlatestRatesConverter(state, json) {
+  setlatestRatesConverter(state, json, base=false) {
     state.latestRatesConverter.jsonData = json
+    if(base) state.latestRatesConverter.base = base
   },
   setlatestRates(state, json, base=false) {
     state.latestRates.jsonData = json

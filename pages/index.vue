@@ -74,6 +74,9 @@ export default {
     assignValues(obj) {
       const { from, to, num } = obj
       const sampleData = this.$store.state.latestRatesConverter.jsonData
+      // if to changes
+      // fetch historical data with new base
+      // this.$store.commit('setlatestRatesConverter', response json, to)
       if (
         sampleData.data[from.toUpperCase()] &&
         sampleData.data[to.toUpperCase()]
@@ -93,6 +96,7 @@ export default {
       } else {
         this.snackbar = true
       }
+
     },
     calc(from, to, num, side = 'right', sampleData) {
       if (!sampleData) {
