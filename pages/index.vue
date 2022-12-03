@@ -3,8 +3,14 @@
     <converter-input-title @request="assignValues" @snack="snackbar = true" />
 
     <ValidationObserver ref="observer">
-      <v-card class="convert-card mb-4 rounded-xl d-flex justify-space-between align-center flex-column flex-md-row">
-        <ConverterCurrencyCard :currency="currencyFrom" :num="num1" @valueChange="setNewValue($event, 1)" />
+      <v-card
+        class="convert-card mb-4 rounded-xl d-flex justify-space-between align-center flex-column flex-md-row"
+      >
+        <ConverterCurrencyCard
+          :currency="currencyFrom"
+          :num="num1"
+          @valueChange="setNewValue($event, 1)"
+        />
         <div class="">
           <v-btn icon class="pa-7 button-to" @click="convertManully('right')">
             <v-icon dark large> mdi-arrow-right </v-icon>
@@ -13,7 +19,11 @@
             <v-icon dark large> mdi-arrow-left </v-icon>
           </v-btn>
         </div>
-        <ConverterCurrencyCard :currency="currencyTo" :num="num2" @valueChange="setNewValue($event, 2)" />
+        <ConverterCurrencyCard
+          :currency="currencyTo"
+          :num="num2"
+          @valueChange="setNewValue($event, 2)"
+        />
       </v-card>
     </ValidationObserver>
 
@@ -27,7 +37,11 @@
     </v-snackbar>
 
     <CurrencyGraph v-if="chartData" :currency-data="chartData" />
-    <v-skeleton-loader v-if="!chartData" class="mx-auto rounded-xl" type="image"></v-skeleton-loader>
+    <v-skeleton-loader
+      v-if="!chartData"
+      class="mx-auto rounded-xl"
+      type="image"
+    ></v-skeleton-loader>
   </v-container>
 </template>
 
@@ -50,28 +64,28 @@ export default {
       chartData: null,
     }
   },
-  mounted() {
-    if (this.$store.state.latestRatesConverter.jsonData) {
-      this.convertManully('right');
-    };
-    if (this.$store.state.historicalRates.jsonData) {
-      this.printBar();
-    };
-  },
   watch: {
     '$store.state.latestRatesConverter.jsonData'(newValue) {
       if (newValue) {
-        this.convertManully('right');
+        this.convertManully('right')
       }
     },
     '$store.state.historicalRates.jsonData': {
       deep: true,
       handler(newValue) {
         if (newValue.data.length === 12) {
-          this.printBar();
+          this.printBar()
         }
-      }
+      },
     },
+  },
+  mounted() {
+    if (this.$store.state.latestRatesConverter.jsonData) {
+      this.convertManully('right')
+    }
+    if (this.$store.state.historicalRates.jsonData) {
+      this.printBar()
+    }
   },
   methods: {
     assignValues(obj) {
@@ -96,7 +110,6 @@ export default {
       } else {
         this.snackbar = true
       }
-
     },
     calc(from, to, num, side = 'right', sampleData) {
       if (!sampleData) {
@@ -135,10 +148,9 @@ export default {
         historicalData.data.forEach((month) => {
           this.chartData.push(month.rates[this.currencyTo])
         })
-      }
-      else{
-        this.$store.commit('setHistoricalBase',this.currencyFrom.trim())
-        this.$store.dispatch('getHistoricalData',this.currencyFrom)
+      } else {
+        this.$store.commit('setHistoricalBase', this.currencyFrom.trim())
+        this.$store.dispatch('getHistoricalData', this.currencyFrom)
         const historicalData = this.$store.state.historicalRates.jsonData
         historicalData.data.forEach((month) => {
           this.chartData.push(month.rates[this.currencyTo])
@@ -153,7 +165,6 @@ export default {
         toSum: this.num2,
       })
     },
-
   },
 }
 </script>
