@@ -89,17 +89,31 @@ export default {
                     // is valid, different currency, this currency exists 
                     if (result
                         && this.$store.state.latestRates.jsonData.data[this.baseCurrency.toUpperCase()]) {
-                        // request list with base currency of this.baseCurrency
-                        // this.rates = true;
-                        // this.dataRates = response json
-                        // this.$store.commit('setlatestRates', response json, this.baseCurrency.toUpperCase())
-                        console.log();
+                        this.requestRates();
                     } else {
                         this.snackbar = true
                     }
                 }
             })
         },
+        async requestRates() {
+            let url1 = 'https://api.currencyapi.com/v3/latest?apikey=mECXec0IwIt52Ik75EuwAHKMDCfMQNEB9oHEgi23&base_currency=';
+            url1 += this.baseCurrency.toUpperCase().trim();
+            const options1 = {
+                method: 'GET',
+            };
+
+            const latestRatesResponse = await fetch(url1, options1);
+            if (latestRatesResponse.ok) {
+                const json = await latestRatesResponse.json();
+                console.log(json);
+                this.rates = true;
+                this.dataRates = json;
+                this.$store.commit('setlatestRates', json, this.baseCurrency.toUpperCase().trim())
+            } else {
+                alert("Ошибка API latestRates: " + latestRatesResponse.status);
+            }
+        }
     },
 }
 </script>

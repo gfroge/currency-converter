@@ -12,7 +12,8 @@
 export default {
   name: 'DefaultLayout',
   mounted() {
-    this.$store.dispatch('getSampleData')
+    this.$store.dispatch('getInitialData')
+
   },
 }
 </script>
