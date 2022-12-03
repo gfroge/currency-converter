@@ -37,6 +37,11 @@
 
 export default {
   name: 'IndexPage',
+  props: {
+    usdData: {
+      type: String,
+    },
+  },
   data() {
     return {
       currencyFrom: 'AED',
@@ -62,7 +67,6 @@ export default {
       else {
         this.snackbar = true;
       }
-
     },
     calc(from, to, num, side = 'right', sampleData) {
       if (!sampleData) {

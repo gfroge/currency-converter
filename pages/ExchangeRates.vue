@@ -70,7 +70,8 @@ export default {
         getRates() {
             this.$refs.observer.validate().then((result) => {
                 if (result) {
-                    console.log();
+                    // request list with base currency of this.baseCurrency
+                    console.log(this.baseCurrency);
                 } else {
                     this.snackbar = true
                 }

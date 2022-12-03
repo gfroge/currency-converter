@@ -2,7 +2,7 @@
   <v-app dark>
     <AppHeader />
     <v-main>
-      <Nuxt />
+      <Nuxt/>
     </v-main>
     <AppFooter />
   </v-app>
