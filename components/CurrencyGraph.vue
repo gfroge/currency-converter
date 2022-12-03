@@ -1,9 +1,11 @@
 <template>
     <div class="graph-wrap">
         <Bar :chart-data="chartData" />
-        <v-chip v-if="(chip && w==599)" class="ma-2" close @click:close="chip = false">
-            Переверните экран, чтобы отобразить график
-        </v-chip>
+        <div class="d-flex justify-center">
+            <v-chip v-if="(chip && w == 599)" class="ma-2" close @click:close="chip = false">
+                Переверните экран, чтобы отобразить график
+            </v-chip>
+        </div>
     </div>
 </template>
 
