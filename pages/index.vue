@@ -105,6 +105,7 @@ export default {
           'right',
           sampleData
         )
+        this.convertManully('right')
         this.printBar()
         this.setStoreValues()
       } else {
